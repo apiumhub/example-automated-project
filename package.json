@@ -1,0 +1,21 @@
+{
+  "name": "example-automated-project",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "make run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apiumtech/example-automated-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apiumtech/example-automated-project/issues"
+  },
+  "homepage": "https://github.com/apiumtech/example-automated-project#readme",
+  "dependencies": {
+    "colors": "^1.1.2"
+  }
+}

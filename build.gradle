@@ -1,0 +1,24 @@
+group 'com.apiumtech'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+
+sourceSets {
+    jobs {
+        groovy {
+            srcDirs 'jobs'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://repo.jenkins-ci.org/releases/'
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile 'org.jenkins-ci.plugins:job-dsl-core:1.38'
+}
