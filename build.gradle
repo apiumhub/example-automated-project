@@ -1,3 +1,5 @@
+def dockerName = "docker.apiumtech.io/example-automated-project"
+
 group 'com.apiumtech'
 version '1.0-SNAPSHOT'
 
@@ -21,4 +23,12 @@ repositories {
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     compile 'org.jenkins-ci.plugins:job-dsl-core:1.38'
+}
+
+task "docker-build"(type:Exec) {
+    commandLine 'docker', 'build', '-t', dockerName, '.'
+}
+
+task "docker-run"(type: Exec) {
+    commandLine 'docker', 'run', dockerName
 }

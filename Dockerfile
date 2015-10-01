@@ -6,4 +6,4 @@ WORKDIR /app/
 COPY . ./
 
 RUN npm install
-CMD make run
+CMD node src/main.js
