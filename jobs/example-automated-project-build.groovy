@@ -21,4 +21,14 @@ job("example-automated-project-build") {
     steps {
         shell("./gradlew docker-build")
     }
+
+    publishers {
+        buildPipelineTrigger('example-automated-project-run-docker')
+    }
+}
+
+job("example-automated-project-run-docker") {
+    steps {
+        shell("docker run docker.apiumtech.io/example-automated-project")
+    }
 }
