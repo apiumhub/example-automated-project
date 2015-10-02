@@ -6,7 +6,7 @@ import javaposse.jobdsl.dsl.DslFactory
  * @since 10/1/15.
  */
 
-ApiumDsl.dockerJob(this as DslFactory, "example-automated-project-build", 'docker.apiumtech.io/example-automated-project') {
+ApiumDsl.dockerJob(job("example-automated-project-build"), 'docker.apiumtech.io/example-automated-project') {
     label("docker")
 
     authorization {
@@ -27,12 +27,6 @@ ApiumDsl.dockerJob(this as DslFactory, "example-automated-project-build", 'docke
 
     triggers {
         scm("H/3 * * * *")
-    }
-
-    steps {
-        shell("docker login -e dev@apiumtech.com -u apium.developer -p 4p1umt3chr0cks docker.apiumtech.io")
-        shell("docker build -t docker.apiumtech.io/example-automated-project .")
-        shell("docker push docker.apiumtech.io/example-automated-project")
     }
 
     publishers {
