@@ -19,7 +19,7 @@ job("example-automated-project-build") {
     }
 
     steps {
-        shell("docker login -u apium.developer -p 4p1umt3chr0cks docker.apiumtech.io")
+        shell("docker login -e dev@apiumtech.com -u apium.developer -p 4p1umt3chr0cks docker.apiumtech.io")
         shell("docker build -t docker.apiumtech.io/example-automated-project .")
         shell("docker push docker.apiumtech.io/example-automated-project")
     }
