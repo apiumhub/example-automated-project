@@ -1,8 +1,12 @@
+import dsl.ApiumDsl
+import javaposse.jobdsl.dsl.DslFactory
+
 /**
  * @author kevin
  * @since 10/1/15.
  */
-job("example-automated-project-build") {
+
+ApiumDsl.dockerJob(this as DslFactory, "example-automated-project-build", 'docker.apiumtech.io/example-automated-project') {
     label("docker")
 
     authorization {
