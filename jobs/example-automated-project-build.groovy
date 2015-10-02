@@ -10,7 +10,7 @@ dockerJob(job("example-automated-project-build"), 'docker.apiumtech.io/example-a
 
     defaultCredentials(this)
     pollingScm(this)
-    accessFor(this, 'jenkins-admin')
+    accessFor(this)
 
     authorization {
         blocksInheritance()

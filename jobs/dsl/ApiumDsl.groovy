@@ -21,7 +21,7 @@ class ApiumDsl {
         job.with(closure)
     }
 
-    static defaultCredentials(Job job) {
+    static defaultCredentials(def job) {
         job.with {
             scm {
                 git {
@@ -36,7 +36,7 @@ class ApiumDsl {
         }
     }
 
-    static pollingScm(Job job) {
+    static pollingScm(def job) {
         job.with {
             triggers {
                 scm("H/3 * * * *")
@@ -44,10 +44,11 @@ class ApiumDsl {
         }
     }
 
-    static accessFor(Job job, String ...groups) {
+    static accessFor(def job, String ...groups) {
         job.with {
             authorization {
                 blocksInheritance()
+                permissionAll("jenkins-admin")
                 groups.each {
                     permissionAll(it)
                 }
