@@ -1,29 +1,19 @@
 package dsl
 
-import javaposse.jobdsl.dsl.DslContext
 import javaposse.jobdsl.dsl.Job
-import javaposse.jobdsl.dsl.jobs.FreeStyleJob
 
 /**
  * @author kevin
  * @since 10/2/15.
  */
-class ApiumDsl {
-    static dockerJob(Job job, String dockerName, @DslContext(FreeStyleJob) Closure closure) {
-        job.with {
-            label("docker")
+abstract class ApiumJob {
+    protected Job job
 
-            steps {
-                shell("docker login -e dev@apiumtech.com -u apium.developer -p 4p1umt3chr0cks docker.apiumtech.io")
-                shell("docker build -t $dockerName .")
-                shell("docker push $dockerName")
-            }
-        }
-
-        job.with(closure)
+    ApiumJob(Job job) {
+        this.job = job
     }
 
-    static pollingScm(Job job, String repoUrl, String repoBranch = "master", String repoCredentials = "2dc4f749-cf26-45b4-a3b6-694c795ebbb9") {
+    def pollingScm(String repoUrl, String repoBranch = "master", String repoCredentials = "2dc4f749-cf26-45b4-a3b6-694c795ebbb9") {
         job.with {
             scm {
                 git {
@@ -40,9 +30,11 @@ class ApiumDsl {
                 scm("H/3 * * * *")
             }
         }
+
+        return this
     }
 
-    static jobAuthorization(Job job, String ...groups) {
+    def jobAuthorization(String ...groups) {
         job.with {
             authorization {
                 blocksInheritance()
@@ -52,5 +44,7 @@ class ApiumDsl {
                 }
             }
         }
+
+        return this
     }
 }

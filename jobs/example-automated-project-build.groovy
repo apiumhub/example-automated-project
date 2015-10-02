@@ -1,27 +1,24 @@
-import static dsl.ApiumDsl.*
+import dsl.DockerPublishingJob
+import dsl.DockerPullingJob
 
 /**
  * @author kevin
  * @since 10/1/15.
  */
 
-def buildingJob = job("example-automated-project-build")
-dockerJob(buildingJob, 'docker.apiumtech.io/example-automated-project') {
-    pollingScm(buildingJob, 'https://github.com/apiumtech/example-automated-project.git')
-    jobAuthorization(buildingJob)
+def DockerImage = 'docker.apiumtech.io/example-automated-project'
 
+DockerPublishingJob.create(job("example-automated-project-build"), DockerImage) {
     publishers {
         downstream('example-automated-project-run-docker')
     }
 }
+.pollingScm('https://github.com/apiumtech/example-automated-project.git')
+.jobAuthorization()
 
-def runDockerJob = job("example-automated-project-run-docker")
-runDockerJob.with {
-    label("docker")
 
-    jobAuthorization(runDockerJob)
-
+DockerPullingJob.create(job("example-automated-project-run-docker"), DockerImage) {
     steps {
-        shell("docker run docker.apiumtech.io/example-automated-project")
+        shell("docker run " + DockerImage)
     }
-}
+}.jobAuthorization()
