@@ -20,4 +20,38 @@ class ApiumDsl {
 
         job.with(closure)
     }
+
+    static defaultCredentials(Job job) {
+        job.with {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/apiumtech/example-automated-project.git')
+                        branch("master")
+                        credentials("2dc4f749-cf26-45b4-a3b6-694c795ebbb9")
+                    }
+                    clean()
+                }
+            }
+        }
+    }
+
+    static pollingScm(Job job) {
+        job.with {
+            triggers {
+                scm("H/3 * * * *")
+            }
+        }
+    }
+
+    static accessFor(Job job, String ...groups) {
+        job.with {
+            authorization {
+                blocksInheritance()
+                groups.each {
+                    permissionAll(it)
+                }
+            }
+        }
+    }
 }

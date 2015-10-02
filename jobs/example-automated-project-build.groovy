@@ -9,24 +9,13 @@ import javaposse.jobdsl.dsl.DslFactory
 ApiumDsl.dockerJob(job("example-automated-project-build"), 'docker.apiumtech.io/example-automated-project') {
     label("docker")
 
+    defaultCredentials(this)
+    pollingScm(this)
+    accessFor(this, 'jenkins-admin')
+
     authorization {
         blocksInheritance()
         permissionAll("jenkins-admin")
-    }
-
-    scm {
-        git {
-            remote {
-                url('https://github.com/apiumtech/example-automated-project.git')
-                branch("master")
-                credentials("2dc4f749-cf26-45b4-a3b6-694c795ebbb9")
-            }
-            clean()
-        }
-    }
-
-    triggers {
-        scm("H/3 * * * *")
     }
 
     publishers {
