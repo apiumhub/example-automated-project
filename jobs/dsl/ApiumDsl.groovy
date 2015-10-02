@@ -21,37 +21,31 @@ class ApiumDsl {
         job.with(closure)
     }
 
-    static defaultCredentials(def job) {
-        job.with {
-            scm {
-                git {
-                    remote {
-                        url('https://github.com/apiumtech/example-automated-project.git')
-                        branch("master")
-                        credentials("2dc4f749-cf26-45b4-a3b6-694c795ebbb9")
-                    }
-                    clean()
+    static defaultCredentials() {
+        scm {
+            git {
+                remote {
+                    url('https://github.com/apiumtech/example-automated-project.git')
+                    branch("master")
+                    credentials("2dc4f749-cf26-45b4-a3b6-694c795ebbb9")
                 }
+                clean()
             }
         }
     }
 
-    static pollingScm(def job) {
-        job.with {
-            triggers {
-                scm("H/3 * * * *")
-            }
+    static pollingScm() {
+        triggers {
+            scm("H/3 * * * *")
         }
     }
 
-    static accessFor(def job, String ...groups) {
-        job.with {
-            authorization {
-                blocksInheritance()
-                permissionAll("jenkins-admin")
-                groups.each {
-                    permissionAll(it)
-                }
+    static accessFor(String ...groups) {
+        authorization {
+            blocksInheritance()
+            permissionAll("jenkins-admin")
+            groups.each {
+                permissionAll(it)
             }
         }
     }

@@ -8,9 +8,9 @@ import static dsl.ApiumDsl.*
 dockerJob(job("example-automated-project-build"), 'docker.apiumtech.io/example-automated-project') {
     label("docker")
 
-    defaultCredentials(this)
-    pollingScm(this)
-    accessFor(this)
+    defaultCredentials()
+    pollingScm()
+    accessFor()
 
     authorization {
         blocksInheritance()
