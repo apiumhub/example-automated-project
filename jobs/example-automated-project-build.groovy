@@ -1,5 +1,5 @@
-import dsl.DockerPublishingJob
-import dsl.DockerPullingJob
+import com.apiumtech.dsl.DockerPublishingJob
+import com.apiumtech.dsl.DockerPullingJob
 
 /**
  * @author kevin
