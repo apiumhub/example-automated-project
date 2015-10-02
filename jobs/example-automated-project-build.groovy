@@ -8,6 +8,7 @@ job("example-automated-project-build") {
     authorization {
         blocksInheritance()
         permissionAll("oscar.galindo")
+        permissionAll("jenkins-admin")
     }
 
     scm {
@@ -42,6 +43,7 @@ job("example-automated-project-run-docker") {
     authorization {
         blocksInheritance()
         permissionAll("oscar.galindo")
+        permissionAll("jenkins-admin")
     }
 
     steps {
