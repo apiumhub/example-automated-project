@@ -23,9 +23,7 @@ job("example-automated-project-build") {
     }
 
     publishers {
-        joinTrigger {
-            projects('example-automated-project-run-docker')
-        }
+        downstream('example-automated-project-run-docker')
     }
 }
 
