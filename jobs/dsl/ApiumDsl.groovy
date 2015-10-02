@@ -11,6 +11,8 @@ import javaposse.jobdsl.dsl.jobs.FreeStyleJob
 class ApiumDsl {
     static dockerJob(Job job, String dockerName, @DslContext(FreeStyleJob) Closure closure) {
         job.with {
+            label("docker")
+
             steps {
                 shell("docker login -e dev@apiumtech.com -u apium.developer -p 4p1umt3chr0cks docker.apiumtech.io")
                 shell("docker build -t $dockerName .")
@@ -21,7 +23,7 @@ class ApiumDsl {
         job.with(closure)
     }
 
-    static pollingScm(Job job, String repoUrl, String repoBranch = "master", String repoCredentials = "") {
+    static pollingScm(Job job, String repoUrl, String repoBranch = "master", String repoCredentials = "2dc4f749-cf26-45b4-a3b6-694c795ebbb9") {
         job.with {
             scm {
                 git {

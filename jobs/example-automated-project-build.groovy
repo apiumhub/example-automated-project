@@ -7,8 +7,6 @@ import static dsl.ApiumDsl.*
 
 def buildingJob = job("example-automated-project-build")
 dockerJob(buildingJob, 'docker.apiumtech.io/example-automated-project') {
-    label("docker")
-
     pollingScm(buildingJob, 'https://github.com/apiumtech/example-automated-project.git')
     jobAuthorization(buildingJob)
 
@@ -17,13 +15,11 @@ dockerJob(buildingJob, 'docker.apiumtech.io/example-automated-project') {
     }
 }
 
-job("example-automated-project-run-docker") {
+def runDockerJob = job("example-automated-project-run-docker")
+runDockerJob.with {
     label("docker")
 
-    authorization {
-        blocksInheritance()
-        permissionAll("jenkins-admin")
-    }
+    jobAuthorization(runDockerJob)
 
     steps {
         shell("docker run docker.apiumtech.io/example-automated-project")
