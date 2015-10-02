@@ -3,6 +3,8 @@
  * @since 10/1/15.
  */
 job("example-automated-project-build") {
+    label("docker")
+
     scm {
         git {
             remote {
@@ -30,6 +32,8 @@ job("example-automated-project-build") {
 }
 
 job("example-automated-project-run-docker") {
+    label("docker")
+
     steps {
         shell("docker run docker.apiumtech.io/example-automated-project")
     }
