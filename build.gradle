@@ -1,5 +1,3 @@
-def dockerName = "docker.apiumtech.io/example-automated-project"
-
 group 'com.apiumtech'
 version '1.0-SNAPSHOT'
 
