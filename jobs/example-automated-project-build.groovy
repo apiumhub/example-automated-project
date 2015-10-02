@@ -5,6 +5,11 @@
 job("example-automated-project-build") {
     label("docker")
 
+    authorization {
+        blocksInheritance()
+        permissionAll("oscar.galindo")
+    }
+
     scm {
         git {
             remote {
@@ -33,6 +38,11 @@ job("example-automated-project-build") {
 
 job("example-automated-project-run-docker") {
     label("docker")
+
+    authorization {
+        blocksInheritance()
+        permissionAll("oscar.galindo")
+    }
 
     steps {
         shell("docker run docker.apiumtech.io/example-automated-project")
