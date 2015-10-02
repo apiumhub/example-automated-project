@@ -23,7 +23,9 @@ job("example-automated-project-build") {
     }
 
     publishers {
-        buildPipelineTrigger('example-automated-project-run-docker')
+        joinTrigger {
+            projects('example-automated-project-run-docker')
+        }
     }
 }
 
