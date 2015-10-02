@@ -8,14 +8,8 @@ import static dsl.ApiumDsl.*
 dockerJob(job("example-automated-project-build"), 'docker.apiumtech.io/example-automated-project') {
     label("docker")
 
-    defaultCredentials()
-    pollingScm()
-    accessFor()
-
-    authorization {
-        blocksInheritance()
-        permissionAll("jenkins-admin")
-    }
+    pollingScm(this, 'https://github.com/apiumtech/example-automated-project.git')
+    jobAuthorization(this)
 
     publishers {
         downstream('example-automated-project-run-docker')
