@@ -5,11 +5,12 @@ import static dsl.ApiumDsl.*
  * @since 10/1/15.
  */
 
-dockerJob(job("example-automated-project-build"), 'docker.apiumtech.io/example-automated-project') {
+def buildingJob = job("example-automated-project-build")
+dockerJob(buildingJob, 'docker.apiumtech.io/example-automated-project') {
     label("docker")
 
-    pollingScm(this, 'https://github.com/apiumtech/example-automated-project.git')
-    jobAuthorization(this)
+    pollingScm(buildingJob, 'https://github.com/apiumtech/example-automated-project.git')
+    jobAuthorization(buildingJob)
 
     publishers {
         downstream('example-automated-project-run-docker')
